@@ -26,7 +26,7 @@ for(i in 1:50){
   d$name[i]       <- results$artists$items[[i]]$name
   d$popularity[i] <- results$artists$items[[i]]$popularity
   d$followers[i]  <- results$artists$items[[i]]$followers$total
-  d$main_genre[i]  <- results$artists$items[[i]]$genres[1] 
+  d$main_genre[i] <- results$artists$items[[i]]$genres[1] 
 }
 
 # to get rid of junk where nerdcore is not the 1st genre, unless I can vouch for them
@@ -41,13 +41,16 @@ d$popularity[d$name=="YTCracker"] <- d$popularity[d$name=="YTCracker"] + 10 # DG
 d$influence <- d$popularity*d$followers
 d[order(d$influence),]
 
+# Fix genre data class so that I can use it in the chart
+d$main_genre <- as.factor(unlist(d$main_genre))
+
 # Plot --------------------------------------------------------------------
-plot_ly(d, x = ~popularity, y = ~followers, type = 'scatter', mode = 'markers', 
-        size = ~influence, color = ~name, colors = colorRampPalette(c('red','blue','green'))(28),
-#         marker = list(opacity = 0.5, sizemode = 'diameter', 
-#                       sizeref = 1.5),
-        text = ~paste('Name:', ~name, '<br>Influence (followers*popularity):', ~influence)) %>%
+plot_ly(d, x = popularity, y = followers, type = 'scatter', mode = 'markers+text', 
+        size = influence, color = main_genre, #colors = colorRampPalette(c('red','blue','green'))(28),
+        marker = list(opacity = 0.5, sizemode = 'diameter', 
+                      sizeref = 1.5),
+        text = name) %>%
   layout(title = 'Nerdcore on Spotify',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE),
-         showlegend = FALSE)
+         showlegend = T)
