@@ -1,8 +1,8 @@
 pacman::p_load(dplyr, httr, plotly)
 
 # Setup -------------------------------------------------------------------
-clientID <- '24f3a86d3b164c7591f7f994ce59bc36'
-secret   <- '380c2096a62a494eb8c04cfc18bf86bd'
+clientID <- 'get'
+secret   <- 'your own!'
 response <- POST(
                 'https://accounts.spotify.com/api/token',
                 accept_json(),
