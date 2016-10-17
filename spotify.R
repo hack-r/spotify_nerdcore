@@ -31,7 +31,7 @@ for(i in 1:50){
 
 # to get rid of junk where nerdcore is not the 1st genre, unless I can vouch for them
 # BTW WTH is 'antiviral pop'?
-d <- d[d$main_genre=="nerdcore" | d$name %in% c("MC Frontalot", "MC Lars"), ] 
+d <- d[d$main_genre=="nerdcore" | d$name %in% c("MC Frontalot", "MC Lars", "MC Chris"), ] 
 
 # *COUGH*
 d$popularity[d$name=="YTCracker"] <- d$popularity[d$name=="YTCracker"] + 10 # DG bonus
