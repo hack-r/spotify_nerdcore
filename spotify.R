@@ -7,8 +7,8 @@ response <- POST(
                 'https://accounts.spotify.com/api/token',
                 accept_json(),
                 authenticate(clientID, secret),
-                body   <- list(grant_type <- 'client_credentials'),
-                encode <- 'form',
+                body   = list(grant_type <- 'client_credentials'),
+                encode = 'form',
                 verbose()
 )
 mytoken     <- content(response)$access_token
